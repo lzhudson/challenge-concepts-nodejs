@@ -45,7 +45,7 @@ app.put("/repositories/:id", repositoryIsExits, (request, response) => {
   return response.json(repositories[repositoryIndex]);
 });
 
-app.delete("/repositories/:id", (request, response) => {
+app.delete("/repositories/:id", repositoryIsExits, (request, response) => {
   const { id } = request.query;
 
   const repositoryIndex = repositories.findIndex(repository => repository.id === id);
