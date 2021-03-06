@@ -40,7 +40,12 @@ app.put("/repositories/:id", (request, response) => {
 });
 
 app.delete("/repositories/:id", (request, response) => {
-  // TODO
+  const { id } = request.query;
+
+  const repositoryIndex = repositories.findIndex(repository => repository.id === id);
+  repositories.splice(repositoryIndex, 1);
+
+  return response.status(204).send();
 });
 
 app.post("/repositories/:id/like", (request, response) => {
