@@ -10,6 +10,12 @@ app.use(cors());
 
 const repositories = [];
 
+function repositoryIsExits(request, response, next) {
+  const { id } = request.params;
+  const isRepositoryExists = repositories.find(repository => repository.id === id);
+  return !isRepositoryExists ? response.status(400).send() : next();
+}
+
 app.get("/repositories", (request, response) => {
   return response.json(repositories);
 });
